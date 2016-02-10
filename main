@@ -1,0 +1,56 @@
+import pygame
+
+class Robot(pygame.sprite.Sprite):
+    """
+    this class will get the robot
+
+    """
+
+    def __init__(self,image):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(image).convert_alpha()
+        self.rect = self.image.get_rect()
+
+
+
+pygame.init()
+
+def mainloop():
+    clock = pygame.time.Clock()
+    crashed = False
+    
+    #creating the background
+    screen = pygame.display.set_mode((1280,640))
+    background = pygame.image.load('back.png')
+    screen.blit(background, (0,0))
+
+    #calling classes
+    space_ship = Robot('robot.png')
+    
+    #creating groups for sprites
+    robot = pygame.sprite.Group()
+
+    #adding sprites to the group
+    robot.add(space_ship)
+
+    
+    
+
+
+    while not crashed:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                crashed = True
+
+        #drawing the robot to the screen
+        robot.draw(screen)
+        robot.update()
+
+        
+        pygame.display.update()
+
+mainloop()
+
+
+
+pygame.quit()
