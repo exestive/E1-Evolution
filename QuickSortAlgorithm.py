@@ -13,7 +13,7 @@ def quickSortHelper(alist,first,last):
 def partition(alist,first,last):
    pivotvalue = alist[first]
 
-   leftmark = first+1
+leftmark = first+1
    rightmark = last
 
    done = False
