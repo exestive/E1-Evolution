@@ -33,9 +33,13 @@ class Item(Character):
 
 class Robot(Character):
 
+    List = []
+
     def __init__(self,x,y):
         Character.__init__(self,x,y)
+        Robot.List.append(self)
 
     def draw(self,screen):
-        r = self.width // 2
-        pygame.draw.circle(screen, [77,234,156], (self.x + r, self.y + r), r)
+        for robot in Robot.List:
+            r = self.width // 2
+            pygame.draw.circle(screen, [77,234,156], (self.x + r, self.y + r), r)
