@@ -2,6 +2,8 @@ import pygame
 from tileC import Tile
 import Funk
 from Objects import *
+from movement import interaction
+from a_star import A_Star
 
 
 class Control():
@@ -10,8 +12,9 @@ class Control():
         self.screen = pygame.display.set_mode((720,440))
         self.crashed = False
         self.clock = pygame.time.Clock()
-        self.frames = 27
-        self.item1 = Item(200,240)
+        self.FPS = 1
+        self.total_frames = 0
+        self.item = Item(200,240)
         self.robot = Robot(400,120)
 
 
@@ -31,20 +34,22 @@ class Control():
         
 
     def event(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.crashed = True
+        interaction(self.screen, self.robot)
 
     def game_loop(self):
         while not self.crashed:
             self.event()
+            self.screen.fill([0,0,0])
+            A_Star(self.screen, self.item, self.total_frames, self.FPS)
             Tile.draw_tiles(self.screen)
             self.robot.draw(self.screen)
             Item.draw_item(self.screen)
-            print(self.robot)
-            print(self.item1)
-            self.clock.tick(self.frames)
+            #print(self.robot)
+            #print(self.item1)
+            self.clock.tick(self.FPS)
             pygame.display.update()
+            self.total_frames +1
+            
 
 def main():
     pygame.init()
