@@ -17,6 +17,12 @@ def A_Star(screen, item, total_frames, FPS):
     SE = 19
     SW = 17
 
+    for tile in Tile.List:
+        tile.parent = None
+        tile.H = 0
+        tile.G = 0
+        tile.F = 0
+
     def movement(tiles, diagonals, surrounding_node):
         if surrounding_node.number not in diagonals:
             tiles.append(surrounding_node)
@@ -43,6 +49,8 @@ def A_Star(screen, item, total_frames, FPS):
         for tile_number in array:
 
             surrounding_tile = Tile.get_tile(tile_number)
+            if tile_number not in range(1, Tile.total_tiles + 1):
+                continue
 
             if surrounding_tile.walkable and surrounding_tile not in closed_list:
                 # tiles.append(surrounding_tile) # Diagonal movement
@@ -173,9 +181,9 @@ def A_Star(screen, item, total_frames, FPS):
             if parent.number == robot.get_number():
                 break
 
-        for tile in return_tiles:
-            pygame.draw.circle(screen, [34, 95, 200],
-            [tile.x + half - 2, tile.y + half - 2], 5 )
+        #for tile in return_tiles:
+            #pygame.draw.circle(screen, [34, 95, 200],
+            #[tile.x + half - 2, tile.y + half - 2], 5 )
 
         if len(return_tiles) > 1:
             if total_frames % (FPS / 4) == 0:

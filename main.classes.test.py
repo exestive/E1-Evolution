@@ -2,8 +2,26 @@ import pygame
 from tileC import Tile
 import Funk
 from Objects import *
-from movement import interaction
+#from movement import *
 from a_star import A_Star
+import time
+
+
+class Background(pygame.sprite.Sprite):
+    """
+    this class will get the backgorund item on screen
+
+    """
+
+    def __init__(self,image):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load(image).convert_alpha()
+
+
+    def draw(self,surface):
+        surface.blit(self.image,(0,0))
+
+
 
 
 class Control():
@@ -12,17 +30,20 @@ class Control():
         self.screen = pygame.display.set_mode((720,440))
         self.crashed = False
         self.clock = pygame.time.Clock()
-        self.FPS = 1
+        self.FPS = 7
         self.total_frames = 0
+        self.total_frames +1
         self.item = Item(200,240)
-        self.robot = Robot(400,120)
+        self.item_silver = Item_1(400,200)
+        self.item_g = Item_2(330,370)
+        self.item_d = Item_3(120,160)
+        self.robot = Robot(360,220)
+        self.time = 0.15
+        self.background = Background('newback.png')
+        self.key = pygame.key.get_pressed
 
 
-        invalids = (1,2,3,4,5,6,7,8,9,10,11,12,
-                    13,14,15,16,17,18,19,37,55,73,91,
-                    109,127,145,163,181,182,183,184,185,186
-                    ,187,188,189,190,191,192,193,194,195,196,197
-                    ,198,36,54,72,90,108,126,144,162,180,198)
+        invalids = (163,181,182,197,198,180)
 
         for y in range(0,self.screen.get_height(),40):
             for x in range (0,self.screen.get_width(),40):
@@ -34,21 +55,46 @@ class Control():
         
 
     def event(self):
-        interaction(self.screen, self.robot)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                self.crashed = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    A_Star(self.screen, self.item, self.total_frames, self.FPS)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_2:
+                    A_Star(self.screen, self.item_silver, self.total_frames, self.FPS)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_3:
+                    A_Star(self.screen, self.item_g, self.total_frames, self.FPS)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_4:
+                    A_Star(self.screen, self.item_d, self.total_frames, self.FPS)
+
+        #interaction(self.screen, self.item, self.total_frames, self.FPS)
+
 
     def game_loop(self):
         while not self.crashed:
+            self.background.draw(self.screen)
+            self.total_frames +1
             self.event()
-            self.screen.fill([0,0,0])
-            A_Star(self.screen, self.item, self.total_frames, self.FPS)
+            #Item.spawn_item(self.total_frames, self.FPS)
+            
             Tile.draw_tiles(self.screen)
             self.robot.draw(self.screen)
-            Item.draw_item(self.screen)
+            self.item.draw_item(self.screen)
+            self.item_silver.draw_item(self.screen)
+            self.item_g.draw_item(self.screen)
+            self.item_d.draw_item(self.screen)
             #print(self.robot)
             #print(self.item1)
             self.clock.tick(self.FPS)
-            pygame.display.update()
-            self.total_frames +1
+            #time.sleep(self.time)
+            pygame.display.flip()
+
             
 
 def main():
