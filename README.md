@@ -12,11 +12,11 @@ How to use our VRBH
 
 The controls are as follows:
 
-Key press '1' searches for the Bronze Item 
-Key press '2' searches for the Silver Item 
-Key press '3' searches for the Diamond Item
+Key press '1' searches for the Bronze Item                                                                                  
+Key press '2' searches for the Silver Item                                                                                   
+Key press '3' searches for the Diamond Item                                                                                 
 
-Key press 'a' sorts the Inventory from ascending order 
-Key press 'd' sorts the Inventory from descending order
+Key press 'a' sorts the Inventory from ascending order                                                                      
+Key press 'd' sorts the Inventory from descending order                                                                     
 
 
