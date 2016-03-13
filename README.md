@@ -24,5 +24,5 @@ Key press '3' searches for the Diamond Item
 
 Key press 'a' sorts the Inventory from ascending order                                                                      
 Key press 'd' sorts the Inventory from descending order                                                                     
-
+ 
 
