@@ -10,6 +10,12 @@ To use our VRBH download the E1 Game folder and run the file called main.py
 
 How to use our VRBH
 
+To open game download repository from github in form of zip file
+extract the zip folder to your chosen location
+run the file titled "main classes" in IDLE 
+press F5 to open the game in a Pygame window 
+(Its important that you have the version of pygame that corresponds to your version of python already installed or the game will not run)
+
 The controls are as follows:
 
 Key press '1' searches for the Bronze Item                                                                                  
